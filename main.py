@@ -35,7 +35,7 @@ def traduccion():
 	form_download = DownloadFileForm()
 	if form_download.validate_on_submit():
 		session['translate']=False
-		subprocess.call(['latextranslator', "archivos/"+session['filename']])
+		subprocess.call(['./latextranslator', "archivos/"+session['filename']])
 		cont=0
 		final=""
 		for i in session['filename']:
