@@ -1,0 +1,36 @@
+{% extends "base_template.html" %}
+
+{% block css %}
+		<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/main.css") }}">
+{% endblock %}
+
+{% block content %}
+		<main class="main">
+			<div class="titulo-centro">
+				<h1>TRADUCTOR</h1>
+			</div>
+			<div class="cuerpo-centro">
+				<div class="traductor">
+					<form action="/traduccion/" method="post" enctype="multipart/form-data">
+						{{ form_translator.hidden_tag() }}
+						<div class="cargar">
+							{{ form_translator.LaTeXFile.label(class="icon-examinar") }}
+							{{ form_translator.LaTeXFile(id="LaTeXFile") }}
+						</div>
+						<div class="traducir">
+							{{ form_translator.translator_submit.label(class="icon-traducir") }}
+							{{ form_translator.translator_submit(id="translator_submit") }}
+						</div>
+					</form>
+					{% if translate==True %}
+						<p class="mensaje-traducido">Traducido correctamente</p>
+						<form action="" method="post">
+							{{ form_download.hidden_tag() }}
+							{{ form_download.download_submit.label(class="icon-download") }}
+							{{ form_download.download_submit(id="download_submit") }}
+						</form>
+					{% endif %}
+				</div>
+			</div>
+		</main>
+{% endblock %}

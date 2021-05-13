@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block css %}
+		<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/quienes_somos.css") }}">
+{% endblock %}
+
+{% block content %}
+		<main class="main">
+			<div class="titulo-centro">
+				<h1>QUIÉNES SOMOS</h1>
+			</div>
+			<div class="cuerpo-centro">
+				<div class="titulo-team">
+							<h2>Equipo LaTex Translator</h2>
+						</div>
+						<div class="somos">
+							<p>Somos un grupo de estudiantes de Ingeniería Civil Informática de la Universidad Técnica Federico Santa María apasionados por la tecnología y los nuevos desafíos. Nos encanta la innovación y poder solucionar problemas sociales y cotidianos.</p>
+						</div>
+						<div class="bloque-foto">
+							<img class="foto" src="../css/LaTeX-team.jpg">
+						</div>
+			</div>
+		</main>
+{% endblock %}
