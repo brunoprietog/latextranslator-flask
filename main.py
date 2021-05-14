@@ -1,17 +1,16 @@
 import os
-import subprocess
 from flask import Flask, render_template, redirect, url_for, send_file, session
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SubmitField
 from werkzeug.utils import secure_filename
-import lt as lt
+import lt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe' 
 
 class LaTeXFileForm(FlaskForm):
-	LaTeXFile = FileField('CARGAR UN ARCHIVO', validators=[FileRequired(), FileAllowed(['tex'], 'Solo están permitidos archivos LaTeX')])
+	LaTeXFile = FileField('CARGAR UN ARCHIVO', validators=[FileRequired(), FileAllowed(['tex', 'md'], 'Extensión no permitida')])
 	translator_submit = SubmitField('TRADUCIR')
 
 class DownloadFileForm(FlaskForm):
@@ -34,16 +33,12 @@ def traduccion():
 		session['translate'] =True
 		return redirect(url_for('traduccion'))
 	form_download = DownloadFileForm()
-	if form_download.validate_on_submit():
+	if form_download.validate_on_submit() and session['translate']:
 		session['translate']=False
-		lt.translate("archivos/"+session['filename'])
-		cont=0
-		final=""
-		for i in session['filename']:
-			if cont < len(session['filename'])-4: final+=i
-			cont+=1
-		return send_file('archivos/'+final+' traducido.txt', as_attachment=True)
-	if session['translate']==True: return render_template('traduccion.html', form_translator=form_translator, form_download=form_download, translate=session['translate'])
+		translated = lt.translate(f"archivos/{session['filename']}")
+		if translated: return send_file(translated, as_attachment=True)
+		else: return "HA OCURRIDO UN ERROR"
+	if session['translate']: return render_template('traduccion.html', form_translator=form_translator, form_download=form_download, translate=session['translate'])
 	else: return render_template('traduccion.html', form_translator=form_translator)
 
 @app.route('/instrucciones/')

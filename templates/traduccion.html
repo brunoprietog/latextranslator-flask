@@ -14,11 +14,11 @@
 					<form action="/traduccion/" method="post" enctype="multipart/form-data">
 						{{ form_translator.hidden_tag() }}
 						<div class="cargar">
-							{{ form_translator.LaTeXFile.label(class="icon-examinar") }}
-							{{ form_translator.LaTeXFile(id="LaTeXFile") }}
+							{{ form_translator.LaTeXFile.label(class="icon-examinar", tabindex="0", role="button", aria_label="CARGAR UN ARCHIVO") }}
+							{{ form_translator.LaTeXFile(id="LaTeXFile", role="button") }}
 						</div>
 						<div class="traducir">
-							{{ form_translator.translator_submit.label(class="icon-traducir") }}
+							{{ form_translator.translator_submit.label(class="icon-traducir", tabindex="0", role="button", aria_label="Traducir") }}
 							{{ form_translator.translator_submit(id="translator_submit") }}
 						</div>
 					</form>
@@ -26,7 +26,7 @@
 						<p class="mensaje-traducido">Traducido correctamente</p>
 						<form action="" method="post">
 							{{ form_download.hidden_tag() }}
-							{{ form_download.download_submit.label(class="icon-download") }}
+							{{ form_download.download_submit.label(class="icon-download", tabindex="0", role="button", aria_label="DESCARGAR ARCHIVO FINAL") }}
 							{{ form_download.download_submit(id="download_submit") }}
 						</form>
 					{% endif %}

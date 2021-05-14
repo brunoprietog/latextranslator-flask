@@ -6,7 +6,9 @@ import translator as tl
 def translate(nombre_archivo):
 	if nombre_archivo[-3:] == '.md':
 		codigo=tl.markdown(nombre_archivo)
-		tl.traducido(codigo, nombre_archivo[:-3]+' traducido.md')
+		tl.traducido(codigo, f"{nombre_archivo[:-3]} traducido.md")
+		print ("Traducido correctamente")
+		return f"{nombre_archivo[:-3]} traducido.md"
 	elif nombre_archivo[-4:] == '.tex':
 		codigo = tl.string(nombre_archivo, False)
 		#Revisa si hay archivos incrustados en el tex principal para agregarlos a codigo
@@ -35,7 +37,13 @@ def translate(nombre_archivo):
 		codigo=tl.split_codigo(codigo)
 		codigo=re.sub(r'\n{3,}', r'\n\n', codigo)
 		codigo=codigo.replace('\n', '\r\n')
-		tl.traducido(codigo, nombre_archivo[:-4]+' traducido.txt')
+		tl.traducido(codigo, f"{nombre_archivo[:-4]} traducido.txt")
+		print ("Traducido correctamente")
+		return f"{nombre_archivo[:-4]} traducido.txt"
 	else:
 		print('Extensión no soportada')
-	print ("Traducido correctamente")
+		return False
+
+if __name__ == "__main__":
+	nombre_archivo = sys.argv[1]
+	translate(nombre_archivo)
