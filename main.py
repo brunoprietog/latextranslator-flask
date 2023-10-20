@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SubmitField
 from werkzeug.utils import secure_filename
-import lt
+import latextranslator
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe' 
@@ -35,7 +35,7 @@ def traduccion():
 	form_download = DownloadFileForm()
 	if form_download.validate_on_submit() and session['translate']:
 		session['translate']=False
-		translated = lt.translate(f"archivos/{session['filename']}")
+		translated = latextranslator.translate(f"archivos/{session['filename']}")
 		if translated: return send_file(translated, as_attachment=True)
 		else: return "HA OCURRIDO UN ERROR"
 	if session['translate']: return render_template('traduccion.html', form_translator=form_translator, form_download=form_download, translate=session['translate'])
