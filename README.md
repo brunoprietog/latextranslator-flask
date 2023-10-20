@@ -2,4 +2,4 @@
 
 Host LaTeX Translator with Flask
 
-<https://latextranslator.up.railway.app/>
+<https://latextranslator.brunoprietog.com>
