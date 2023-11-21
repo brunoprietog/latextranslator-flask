@@ -14,5 +14,5 @@ debug.log
 debug.log
 
 #  files
-archivos/*.txt
-archivos/*.tex
+storage/*.txt
+storage/*.tex
